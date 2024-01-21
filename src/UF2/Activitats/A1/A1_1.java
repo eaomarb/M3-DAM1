@@ -1,5 +1,4 @@
 //Crear una funció que rebi 3 números com a paràmetres i digui el màxim.
-//funciona
 public class A1_1 {
 
     public static int numeroMaxim(int n1, int n2, int n3) {
