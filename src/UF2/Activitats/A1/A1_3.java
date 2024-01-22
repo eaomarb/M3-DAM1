@@ -33,6 +33,27 @@ public class A1_3 {
         return min;
     }
 
+    public static double mitjana(int matriu[][]) {
+        double suma = 0;
+        for (int files = 0; files < matriu.length; files++) {
+            for (int columnes = 0; columnes < matriu.length; columnes++) {
+                suma += matriu[files][columnes];
+            }
+        }
+        return suma;
+    }
+
+    public static int maximFilaColumna(int matriu[][], int fila, int columna) {
+        int max = Integer.MIN_VALUE;
+        for (int files = 0; files < matriu.length; files++) {
+            for (int columnes = 0; columnes < matriu.length; columnes++) {
+                if (matriu[fila][columna] > max) {
+                    max = matriu[files][columnes];
+                }
+            }
+        } return max;
+    }
+
     public static void main(String[] args) {
         Scanner teclat = new Scanner(System.in);
 
