@@ -21,6 +21,18 @@ public class A1_3 {
         return max;
     }
 
+    public static int minim(int matriu[][]) {
+        int min = Integer.MAX_VALUE;
+        for (int files = 0; files < matriu.length; files++) {
+            for (int columnes = 0; columnes < matriu.length; columnes++) {
+                if (matriu[files][columnes] < min) {
+                    min = matriu[files][columnes];
+                }
+            }
+        }
+        return min;
+    }
+
     public static void main(String[] args) {
         Scanner teclat = new Scanner(System.in);
 
