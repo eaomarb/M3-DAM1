@@ -9,7 +9,7 @@
 import java.util.Scanner;
 
 public class A1_3 {
-    public static int maxim(int matriu[][]) {
+    public static int maxim(int[][] matriu) {
         int max = Integer.MIN_VALUE;
         for (int files = 0; files < matriu.length; files++) {
             for (int columnes = 0; columnes < matriu[files].length; columnes++) {
@@ -21,7 +21,7 @@ public class A1_3 {
         return max;
     }
 
-    public static int minim(int matriu[][]) {
+    public static int minim(int[][] matriu) {
         int min = Integer.MAX_VALUE;
         for (int files = 0; files < matriu.length; files++) {
             for (int columnes = 0; columnes < matriu[files].length; columnes++) {
@@ -33,7 +33,7 @@ public class A1_3 {
         return min;
     }
 
-    public static double mitjana(int matriu[][]) {
+    public static double mitjana(int[][] matriu) {
         double suma = 0;
         for (int files = 0; files < matriu.length; files++) {
             for (int columnes = 0; columnes < matriu[files].length; columnes++) {
@@ -43,7 +43,7 @@ public class A1_3 {
         return suma / (matriu.length);
     }
 
-    public static int maximFila(int matriu[][], int fila) {
+    public static int maximFila(int[][] matriu, int fila) {
         int max = Integer.MIN_VALUE;
         for (int columnes = 0; columnes < matriu[fila].length; columnes++) {
             if (matriu[fila][columnes] > max) {
@@ -53,7 +53,7 @@ public class A1_3 {
         return max;
     }
 
-    public static int maximColumna(int matriu[][], int columna) {
+    public static int maximColumna(int[][] matriu, int columna) {
         int max = Integer.MIN_VALUE;
         for (int files = 0; files < matriu.length; files++) {
             if (matriu[files][columna] > max) {
@@ -63,7 +63,7 @@ public class A1_3 {
         return max;
     }
 
-    public static double mitjanaFila(int matriu[][], int fila) {
+    public static double mitjanaFila(int[][] matriu, int fila) {
         double suma = 0;
         for (int columnes = 0; columnes < matriu[fila].length; columnes++) {
             suma += matriu[fila][columnes];
@@ -71,7 +71,7 @@ public class A1_3 {
         return suma / matriu[fila].length;
     }
 
-    public static double mitjanaColumna(int matriu[][], int columna) {
+    public static double mitjanaColumna(int[][] matriu, int columna) {
         double suma = 0;
         for (int files = 0; files < matriu.length; files++) {
             suma += matriu[files][columna];
