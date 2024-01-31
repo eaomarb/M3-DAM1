@@ -1,10 +1,10 @@
 // 1 - Funció que demani a l'usuari una matriu
 // 2 - Funció que mostri la matriu
-
+/*
 import java.util.Scanner;
 
 public class Test1 {
-    public static void crearMatriu() {
+    public static void crearMatriu(int[][] matriu) {
         Scanner teclat = new Scanner(System.in);
 
         System.out.println("Quantes files vols?");
@@ -13,10 +13,17 @@ public class Test1 {
         System.out.println("Quantes columnes vols?");
         int columnes = teclat.nextInt();
 
-        int[][] matriu = new int[files][columnes];
+        for (int fila = 0; fila < matriu.length; fila++) {
+            System.out.println("Fila " + (fila + 1));
+            for (int columna = 0; columna < matriu[fila].length; columna++) {
+                System.out.println();
+            }
+        }
+
+        matriu = new int[files][columnes];
     }
 
-    public static void mostrarMatriu() {
+    public static void mostrarMatriu(int[][] matriu) {
         for (int fila = 0; fila < matriu.length; fila++) {
             for (int columna = 0; columna < matriu[fila].length; columna++) {
                 System.out.print(matriu[fila][columna] + " ");
@@ -31,3 +38,4 @@ public class Test1 {
         mostrarMatriu(matriu);
     }
 }
+*/
