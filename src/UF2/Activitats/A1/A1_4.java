@@ -6,7 +6,6 @@
 import java.util.Scanner;
 
 public class A1_4 {
-
     public static void menuPrincipal() {
         System.out.println("1. Sumar");
         System.out.println("2. Restar");
@@ -41,34 +40,54 @@ public class A1_4 {
         Scanner teclat = new Scanner(System.in);
 
         menuPrincipal();
+
+
         System.out.println("Escull una opció (1-5)");
+
         int opcio = teclat.nextInt();
 
         do {
-            System.out.println("Introdueix el primer número: ");
-            int n1 = teclat.nextInt();
-            System.out.println("Introdueix el segon número: ");
-            int n2 = teclat.nextInt();
+            if (opcio == 5) {
+                sortir();
+            }
+
             switch (opcio) {
                 case 1:
+                    System.out.println("Introdueix el primer número: ");
+                    int n1 = teclat.nextInt();
+                    System.out.println("Introdueix el segon número: ");
+                    int n2 = teclat.nextInt();
+
                     System.out.println(sumar(n1, n2));
 
                     menuPrincipal();
                     break;
                 case 2:
+                    System.out.println("Introdueix el primer número: ");
+                    n1 = teclat.nextInt();
+                    System.out.println("Introdueix el segon número: ");
+                    n2 = teclat.nextInt();
+
                     System.out.println(restar(n1, n2));
                     menuPrincipal();
                     break;
                 case 3:
+                    System.out.println("Introdueix el primer número: ");
+                    n1 = teclat.nextInt();
+                    System.out.println("Introdueix el segon número: ");
+                    n2 = teclat.nextInt();
+
                     System.out.println(multiplicar(n1, n2));
                     menuPrincipal();
                     break;
                 case 4:
+                    System.out.println("Introdueix el primer número: ");
+                    n1 = teclat.nextInt();
+                    System.out.println("Introdueix el segon número: ");
+                    n2 = teclat.nextInt();
+
                     System.out.println(dividir(n1, n2));
                     menuPrincipal();
-                    break;
-                case 5:
-                    sortir();
                     break;
                 default:
                     System.out.println("Revisa bé la opció que has escollit (1-5)!");
@@ -76,7 +95,6 @@ public class A1_4 {
             }
             System.out.println("Escull una opció (1-5)");
             opcio = teclat.nextInt();
-        } while (opcio == 1 || opcio == 2 || opcio == 3 || opcio == 4 || opcio == 5);
-
+        } while (opcio == 1 || opcio == 2 || opcio == 3 || opcio == 4);
     }
 }
