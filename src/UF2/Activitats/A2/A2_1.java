@@ -6,7 +6,6 @@ public class A2_1 {
                 placesLliures++;
             }
         }
-        System.out.println(placesLliures);
         return ((double) placesLliures / parking[fila].length) * 100;
     }
 
@@ -18,13 +17,24 @@ public class A2_1 {
         return placesLliures / parking.length;
     }
 
+    public static double numFilaMesLliure(boolean[][] parking) {
+        double filaMesLliure = 0;
+        for (int fila = 0; fila < parking.length; fila++) {
+            double placesPlacesLliureFila = percentatgePlacesLliuresFila(parking, fila);
+            if (placesPlacesLliureFila > filaMesLliure) {
+                filaMesLliure = fila;
+            }
+        }
+        return filaMesLliure;
+    }
+
     public static void main(String[] args) {
         boolean[][] parking =
                 {{true, false, false, true, true},
                         {false, true, true, true, true},
                         {true, false, false, true, false},
                         {false, true, true, false, true}};
-        System.out.println(percentatgePlacesLliuresParking(parking));
+        System.out.println(numFilaMesLliure(parking));
 
     }
 }
