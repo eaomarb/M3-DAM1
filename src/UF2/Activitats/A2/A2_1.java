@@ -18,15 +18,20 @@ public class A2_1 {
     }
 
     public static double numFilaMesLliure(boolean[][] parking) {
-        double filaMesLliure = 0;
+        double filaMesLliure = -1;
+        double maxPercentatge = Integer.MAX_VALUE;
+
         for (int fila = 0; fila < parking.length; fila++) {
-            double placesPlacesLliureFila = percentatgePlacesLliuresFila(parking, fila);
-            if (placesPlacesLliureFila > filaMesLliure) {
+            double percentatge = percentatgePlacesLliuresFila(parking, fila);
+
+            if (percentatge < maxPercentatge) {
+                maxPercentatge = percentatge;
                 filaMesLliure = fila;
             }
         }
         return filaMesLliure;
     }
+
 
     public static void main(String[] args) {
         boolean[][] parking =
