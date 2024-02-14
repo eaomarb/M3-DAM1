@@ -13,9 +13,17 @@ public class A2_2 {
     }
 
     public static int numFilaOnPodenPlantarBledesMatriu(String[][] hort) {
-        for (int fila = 0; fila < hort[fila].length; fila++){
-
+        int numFilaOnPodenPlantarBledesMatriu = -1;
+        for (int fila = 0; fila < hort.length; fila++) {
+            for (int columna = 0; columna < hort[fila].length; columna++) {
+                if (!hort[fila][columna].equalsIgnoreCase("E") ||
+                        !hort[fila][columna].equalsIgnoreCase("B") ||
+                        !hort[fila][columna].equalsIgnoreCase("R")) {
+                    numFilaOnPodenPlantarBledesMatriu = fila;
+                }
+            }
         }
+        return numFilaOnPodenPlantarBledesMatriu;
     }
 
     public static void main(String[] args) {
@@ -29,5 +37,6 @@ public class A2_2 {
                 {"R", "E", "E", "-"},
                 {"R", "E", "-", "E"},
         };
+        System.out.println(numFilaOnPodenPlantarBledesMatriu(hort));
     }
 }
