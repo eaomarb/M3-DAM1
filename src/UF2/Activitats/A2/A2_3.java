@@ -3,6 +3,10 @@ public class A2_3 {
         int neigboursSum = 0;
         int nPosition = matrix[row][col]; //restar al final
 
+        if (row == 0){
+            //hola
+        }
+
         for (row = 0; row < matrix.length; row++){
             for (col = 0; col < matrix[row].length; col++){
                 if (row == 0 || col != 0){
@@ -25,6 +29,6 @@ public class A2_3 {
         };
 
 
-        System.out.println(calculateNeighborsSum(matrix, 0, 0));
+        System.out.println(calculateNeighborsSum(matrix, 3, 3));
     }
 }
