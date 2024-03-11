@@ -17,7 +17,7 @@ public class A2_2 {
 
         for (int fila = 0; fila < hort.length; fila++) {
             boolean esPodenPlantarBledesFila = esPodenPlantarBledesFila(hort, fila);
-            if (esPodenPlantarBledesFila){
+            if (esPodenPlantarBledesFila) {
                 numFilaOnPodenPlantarBledesMatriu = fila;
             }
 
