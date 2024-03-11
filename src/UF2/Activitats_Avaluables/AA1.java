@@ -33,7 +33,6 @@ public class AA1 {
         return true;
     }
 
-
     public static void mostrarTaulesValides(String[][] restaurant) {
         for (int fila = 0; fila < restaurant.length; fila++) {
             for (int columna = 0; columna < restaurant[0].length; columna++) {
@@ -52,12 +51,11 @@ public class AA1 {
             for (int columna = 0; columna < restaurant[0].length; columna++) {
                 if (esPotColocarTaula(restaurant, fila, columna)) {
                     // Imprimim la posició quan esPotColocarTaula sigui true
-                    System.out.print("(" + fila + ", " + columna + ") ");
+                    System.out.print("(" + fila + ", " + columna + "), ");
                 }
             }
         }
     }
-
 
     public static void main(String[] args) {
         //Declarem la matriu del restaurant
@@ -75,6 +73,5 @@ public class AA1 {
         mostrarTaulesValides(restaurant);
         System.out.print("Les taules vàlides són: ");
         escriureTaulesValides(restaurant);
-
     }
 }
