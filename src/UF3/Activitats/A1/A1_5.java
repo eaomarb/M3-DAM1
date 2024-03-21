@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class A1_5 {
-    public static void writeToFile(int day, int month, int year, String description) throws IOException {
+    public static void writeToFile(String day, String month, String year, String description) throws IOException {
         FileWriter file = new FileWriter("src/UF3/Activitats/A1/A1_5.txt", true);
 
         file.write(day + "/" + month + "/" + year + " " + description + "\n");
@@ -14,13 +14,13 @@ public class A1_5 {
         Scanner kb = new Scanner(System.in);
 
         System.out.println("Enter the day: ");
-        int day = kb.nextInt();
+        String day = kb.next();
 
         System.out.println("Enter the month: ");
-        int month = kb.nextInt();
+        String month = kb.next();
 
         System.out.println("Enter the year: ");
-        int year = kb.nextInt();
+        String year = kb.next();
 
         System.out.println("Enter the description: ");
         String description = kb.next();
