@@ -10,26 +10,21 @@ public class A1_5 {
         file.close();
     }
 
-    public static int findDate(int day, int month, int year) throws IOException {
-        FileWriter file = new FileWriter("src/UF3/Activitats/A1/A1_5.txt", true);
-        return -1;
-    }
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         Scanner kb = new Scanner(System.in);
 
-
         System.out.println("Enter the day: ");
-        String day = kb.nextLine();
+        int day = kb.nextInt();
 
         System.out.println("Enter the month: ");
-        String month = kb.nextLine();
+        int month = kb.nextInt();
 
         System.out.println("Enter the year: ");
-        String year = kb.nextLine();
+        int year = kb.nextInt();
 
         System.out.println("Enter the description: ");
-        String description = kb.nextLine();
+        String description = kb.next();
 
+        writeToFile(day, month, year, description);
     }
 }
