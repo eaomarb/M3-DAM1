@@ -22,10 +22,10 @@ public class A1_5 {
         Scanner scFile = new Scanner(file);
 
         boolean lineFound = false;
-        int = file.
+        int =file.
 
         while (!lineFound) {
-            if (scFile.next().equalsIgnoreCase(day)){
+            if (scFile.next().equalsIgnoreCase(day)) {
 
             }
         }
@@ -34,11 +34,12 @@ public class A1_5 {
 
 
     public static void main(String[] args) throws IOException {
+        /* TODO: Parse string to int */
         Scanner kb = new Scanner(System.in);
 
         System.out.println("Enter the day: ");
         String day = kb.nextLine();
-
+        
         System.out.println("Enter the month: ");
         String month = kb.nextLine();
 
