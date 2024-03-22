@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class A1_5 {
@@ -22,15 +21,14 @@ public class A1_5 {
         Scanner scFile = new Scanner(file);
 
         int line = 1;
-        scFile.nextLine();
         while (scFile.hasNextLine()) {
             if (scFile.nextInt() == day && scFile.nextInt() == month && scFile.nextInt() == year) {
                 return line;
+            } else {
+                scFile.nextLine();
+                line++;
             }
-
-            line++;
         }
-
         return -1;
     }
 
@@ -56,6 +54,6 @@ public class A1_5 {
 
         addDate(day, month, year, description);
 
-        System.out.println(findLineByDate(2, 2, 2));
+        System.out.println(findLineByDate(10, 11, 20223));
     }
 }
