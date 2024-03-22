@@ -54,6 +54,21 @@ public class A1_5 {
 
         addDate(day, month, year, description);
 
-        System.out.println(findLineByDate(10, 11, 20223));
+       System.out.println("Do you want to find a day? (Y/N)");
+        String findLine = kb.nextLine();
+        if (findLine.equalsIgnoreCase("y")) {
+            System.out.println("Enter the day: ");
+            day = kb.nextInt();
+
+            System.out.println("Enter the month: ");
+            month = kb.nextInt();
+
+            System.out.println("Enter the year: ");
+            year = kb.nextInt();
+
+            System.out.println(findLineByDate(day, month, year));
+        } else{
+            System.out.println("adios");
+        }
     }
 }
