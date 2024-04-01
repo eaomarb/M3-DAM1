@@ -32,6 +32,22 @@ public class A1_5 {
         return -1;
     }
 
+    public static int findLineByDescription(String description) throws Exception {
+        File file = new File("src/UF3/Activitats/A1/A1_5.txt");
+        Scanner scFile = new Scanner(file);
+
+        int line = 1;
+
+        while (scFile.hasNextLine()) {
+            if (scFile.nextLine().contains(description)) {
+                return line;
+            } else {
+                line++;
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) throws Exception {
         Scanner kb = new Scanner(System.in);
@@ -54,9 +70,10 @@ public class A1_5 {
 
         addDate(day, month, year, description);
 
-       System.out.println("Do you want to find a day? (Y/N)");
-        String findLine = kb.nextLine();
-        if (findLine.equalsIgnoreCase("y")) {
+        System.out.println("Do you want to find a line by day? (Y/N)");
+        String findLineByDate = kb.nextLine();
+
+        if (findLineByDate.equalsIgnoreCase("y")) {
             System.out.println("Enter the day: ");
             day = kb.nextInt();
 
@@ -67,8 +84,20 @@ public class A1_5 {
             year = kb.nextInt();
 
             System.out.println(findLineByDate(day, month, year));
-        } else{
-            System.out.println("adios");
+        } else {
+            System.out.println("bye");
+        }
+
+        System.out.println("Do you want to find a line by description? (Y/N)");
+        String findLineByDescription = kb.nextLine();
+
+        if (findLineByDescription.equalsIgnoreCase("y")) {
+            System.out.println("Enter the description: ");
+            description = kb.nextLine();
+
+            System.out.println(findLineByDescription(description));
+        } else {
+            System.out.println("bye");
         }
     }
 }

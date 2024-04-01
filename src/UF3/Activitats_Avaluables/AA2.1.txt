@@ -1,0 +1,31 @@
+6
+
+Super Mario Odyssey
+Nintendo Switch
+49.99
+10
+
+The Last of Us Part II
+PlayStation 5
+59.99
+1
+
+Final Fantasy VII Remake
+PlayStation 4
+59.99
+7
+
+The Legend of Zelda: Breath of the Wild
+Nintendo Switch
+59.99
+8
+
+Call of Duty: Warzone
+PC
+10.00
+3
+
+Minecraft
+Xbox One
+19.99
+15
