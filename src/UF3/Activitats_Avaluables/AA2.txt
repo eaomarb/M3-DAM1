@@ -1,4 +1,4 @@
-6
+7
 
 Super Mario Odyssey
 Nintendo Switch
@@ -29,3 +29,8 @@ Minecraft
 Xbox One
 19.99
 15
+
+The Witcher 3
+PS5
+29.99
+10
