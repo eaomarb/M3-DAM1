@@ -150,7 +150,7 @@ public class laberint_pepito {
 
         while (nextMove != 'Q'){
             if (nextMove == 'W'){
-                //moveUp(map);
+                moveUp(map);
             }
         }
 
