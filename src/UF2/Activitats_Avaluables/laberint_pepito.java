@@ -4,39 +4,39 @@ public class laberint_pepito {
     public static char[][] easyMap() {
         return new char[][]{
                 {'P', 'M', 'M', 'S'},
-                {' ', 'M', 'M', ' '},
-                {' ', 'M', 'M', ' '},
-                {' ', ' ', ' ', ' '}
+                {'-', 'M', 'M', '-'},
+                {'-', 'M', 'M', '-'},
+                {'-', '-', '-', '-'}
         };
     }
 
     public static char[][] mediumMap() {
         return new char[][]{
-                {'P', 'M', 'M', ' ', ' ', ' ', ' ', 'S'},
-                {' ', ' ', 'M', ' ', ' ', ' ', 'M', ' '},
-                {' ', ' ', 'M', ' ', ' ', ' ', 'M', ' '},
-                {' ', ' ', ' ', ' ', 'M', 'M', ' ', ' '},
-                {' ', ' ', ' ', ' ', 'M', 'M', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', 'M', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                {'P', 'M', 'M', '-', '-', '-', '-', 'S'},
+                {'-', '-', 'M', '-', '-', '-', 'M', '-'},
+                {'-', '-', 'M', '-', '-', '-', 'M', '-'},
+                {'-', '-', '-', '-', 'M', 'M', '-', '-'},
+                {'-', '-', '-', '-', 'M', 'M', '-', '-'},
+                {'-', '-', '-', '-', '-', '-', '-', '-'},
+                {'-', '-', 'M', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', '-', '-', '-', '-', '-'}
         };
     }
 
     public static char[][] hardMap() {
         return new char[][]{
-                {'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {'M', 'M', 'M', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', 'M', 'M', 'M', 'M', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' '},
-                {' ', 'M', 'M', 'M', 'M', ' ', 'M', 'M', 'M', 'M', ' ', ' '},
-                {' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' '},
-                {' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' '},
-                {' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', 'M', 'S'},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                {'P', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
+                {'M', 'M', 'M', 'M', '-', '-', '-', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', 'M', '-', '-', '-', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', 'M', 'M', 'M', 'M', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', '-', '-', '-', 'M', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', '-', '-', '-', 'M', '-', '-', '-', '-', '-'},
+                {'-', 'M', 'M', 'M', 'M', '-', 'M', 'M', 'M', 'M', '-', '-'},
+                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', '-', '-'},
+                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', '-', '-'},
+                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', 'M', 'S'},
+                {'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
+                {'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'}
         };
     }
 
@@ -50,46 +50,8 @@ public class laberint_pepito {
         return (row >= 0 && row < nRows && col >= 0 && col < nColumns);
     }
 
-    public static boolean isNotAWall(char[][] map, int row, int col) {
-        return map[row][col] != 'M';
-    }
-
-    public static void moveUp(char[][] map, int row, int col) {
-        char nextMove = moves();
-        if (isInsideMatrix(map, row, col) && isNotAWall(map, row, col) && nextMove == 'W') {
-            row -= 1;
-            map[row][col] = 'P';
-            System.out.println("hola xd");
-        }
-    }
-
-    public static void moveDown(char[][] map, int row, int col) {
-        char nextMove = moves();
-        if (isInsideMatrix(map, row, col) && isNotAWall(map, row, col) && nextMove == 'S') {
-            row += 1;
-            map[row][col] = 'P';
-        }
-    }
-
-    public static void moveRight(char[][] map, int row, int col) {
-        char nextMove = moves();
-        if (isInsideMatrix(map, row, col) && isNotAWall(map, row, col) && nextMove == 'D') {
-            col += 1;
-            map[row][col] = 'P';
-        }
-    }
-
-    public static void moveLeft(char[][] map, int row, int col) {
-        char nextMove = moves();
-        if (isInsideMatrix(map, row, col) && isNotAWall(map, row, col) && nextMove == 'A') {
-            col -= 1;
-            map[row][col] = 'P';
-        }
-    }
-
-    public static char moves() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.next().charAt(0);
+    public static boolean isAWall(char[][] map, int row, int col) {
+        return map[row][col] == 'M';
     }
 
     public static void printMap(char[][] map) {
@@ -101,69 +63,118 @@ public class laberint_pepito {
         }
     }
 
-    public static void menu() {
-        Scanner scanner = new Scanner(System.in);
-        int menu = 0;
-        char[][] map;
+    public static void startGame(char[][] map, Scanner scanner) {
+        int row = 0;
+        int col = 0;
 
-        while (menu != 3) {
-            System.out.println();
-            System.out.println("###########");
-            System.out.println("#      Menu     #");
-            System.out.println("###########");
-            System.out.println("1. Jugar partida");
-            System.out.println("2. Resultats partides");
-            System.out.println("3. Sortir");
-            menu = scanner.nextInt();
+        char nextMove = ' ';
+        printMap(map);
 
-            if (menu == 1) {
-                System.out.println("Quin nivell vols jugar?");
-                System.out.println("1. Fàcil");
-                System.out.println("2. Mitjà");
-                System.out.println("3. Difícil");
-
-                int nivell = scanner.nextInt();
-
-                if (nivell == 1) {
-                    map = easyMap();
-                    printMap(map);
-
-                }
-                play();
-            } else if (menu == 2) {
-                // resultats partida
-            } else if (menu == 3) {
-                System.out.println("Has sortit del joc!");
-            } else {
-                System.out.println("Revisa bé la opció que has escollit (1-3)");
-                System.out.println("1. Jugar partida");
-                System.out.println("2. Resultats partides");
-                System.out.println("3. Sortir");
-                menu = scanner.nextInt();
-            }
+        while (nextMove != 'Q') {
+            nextMove = scanner.next().charAt(0);
+            nextMove = Character.toUpperCase(nextMove);
+            move(map, row, col, nextMove);
+            printMap(map);
         }
     }
 
-    public static void play() {
-        Scanner scanner = new Scanner(System.in);
-        char nextMove = scanner.next().charAt(0);
+    public static boolean isGameWon(char[][] map, int row, int col) {
+        return map[row][col] == 'S';
+    }
 
-        while (nextMove != 'Q'){
-            if (nextMove == 'W'){
-                moveUp(map);
-            }
+    public static void move(char[][] map, int row, int col, char nextMove) {
+        if (!isValidMove(map, row, col)) {
+            return;
+        }
+
+        switch (nextMove) {
+            case 'A':
+                map[row][col] = '-';
+                col -= 1;
+                map[row][col] = 'P';
+                break;
+            case 'W':
+                map[row][col] = '-';
+                row -= 1;
+                map[row][col] = 'P';
+                break;
+            case 'D':
+                map[row][col] = '-';
+                col += 1;
+                map[row][col] = 'P';
+                break;
+            case 'S':
+                map[row][col] = '-';
+                row +=  1;
+                map[row][col] = 'P';
+                break;
+            default:
+                break;
         }
 
 
+    }
 
-        /*switch (nextMove){
-            case 'W':
-                moveUp();
-        }*/
+    public static boolean isValidMove(char[][] map, int row, int col) {
+        return isInsideMatrix(map, row, col) && !isAWall(map, row, col);
+    }
 
+    public static int selectMenuOption(Scanner scanner) {
+        System.out.println();
+        System.out.println("###########");
+        System.out.println("#      Menu     #");
+        System.out.println("###########");
+        System.out.println("1. Jugar partida");
+        System.out.println("2. Resultats partides");
+        System.out.println("3. Sortir");
+
+        return scanner.nextInt();
+    }
+
+    public static char selectLevelOption(Scanner scanner) {
+        System.out.println("Quin nivell vols jugar?");
+        System.out.println("1. Fàcil");
+        System.out.println("2. Mitjà");
+        System.out.println("3. Difícil");
+        char selectedLevel = scanner.next().charAt(0);
+        selectedLevel = Character.toUpperCase(selectedLevel);
+
+        return selectedLevel;
     }
 
     public static void main(String[] args) {
-        menu();
+        Scanner scanner = new Scanner(System.in);
+        int selectedMenu = selectMenuOption(scanner);
+
+        while (selectedMenu != 3) {
+            if (selectedMenu == 1) {
+                char selectedLevel = selectLevelOption(scanner);
+
+                if (selectedLevel == '1') {
+                    startGame(easyMap(), scanner);
+                } else if (selectedLevel == '2') {
+                    startGame(mediumMap(), scanner);
+                } else if (selectedLevel == '3') {
+                    startGame(hardMap(), scanner);
+                } else if (selectedLevel == 'Q') {
+                    selectedMenu = selectMenuOption(scanner);
+                }
+
+            } else if (selectedMenu == 2) {
+                // resultats partida
+                System.out.println("Aqui surten els resultats1");
+                selectedMenu = selectMenuOption(scanner);
+            } else if (selectedMenu == 'Q') {
+                selectedMenu = selectMenuOption(scanner);
+            } else {
+                System.out.println("La opció triada no es correcte si us plau escull una opció vàlida");
+                System.out.println("1. Jugar partida");
+                System.out.println("2. Resultats partides");
+                System.out.println("3. Sortir");
+                selectedMenu = scanner.nextInt();
+            }
+        }
+
+        System.out.println("Gràcies per jugar fins un altre!");
     }
 }
