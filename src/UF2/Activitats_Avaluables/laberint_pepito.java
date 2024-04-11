@@ -1,123 +1,142 @@
 import java.util.Scanner;
 
 public class laberint_pepito {
+    static int row = 0;
+    static int col = 0;
+
     public static char[][] easyMap() {
         return new char[][]{
                 {'P', 'M', 'M', 'S'},
-                {'-', 'M', 'M', '-'},
-                {'-', 'M', 'M', '-'},
-                {'-', '-', '-', '-'}
+                {'□', 'M', 'M', '□'},
+                {'□', 'M', 'M', '□'},
+                {'□', '□', '□', '□'}
         };
     }
 
     public static char[][] mediumMap() {
         return new char[][]{
-                {'P', 'M', 'M', '-', '-', '-', '-', 'S'},
-                {'-', '-', 'M', '-', '-', '-', 'M', '-'},
-                {'-', '-', 'M', '-', '-', '-', 'M', '-'},
-                {'-', '-', '-', '-', 'M', 'M', '-', '-'},
-                {'-', '-', '-', '-', 'M', 'M', '-', '-'},
-                {'-', '-', '-', '-', '-', '-', '-', '-'},
-                {'-', '-', 'M', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', '-', '-', '-', '-', '-'}
+                {'P', 'M', 'M', '□', '□', '□', '□', 'S'},
+                {'□', '□', 'M', '□', '□', '□', 'M', '□'},
+                {'□', '□', 'M', '□', '□', '□', 'M', '□'},
+                {'□', '□', '□', '□', 'M', 'M', '□', '□'},
+                {'□', '□', '□', '□', 'M', 'M', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', '□', '□'},
+                {'□', '□', 'M', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', '□', '□'}
         };
     }
 
     public static char[][] hardMap() {
         return new char[][]{
-                {'P', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-                {'M', 'M', 'M', 'M', '-', '-', '-', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', 'M', '-', '-', '-', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', 'M', 'M', 'M', 'M', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', '-', '-', '-', 'M', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', '-', '-', '-', 'M', '-', '-', '-', '-', '-'},
-                {'-', 'M', 'M', 'M', 'M', '-', 'M', 'M', 'M', 'M', '-', '-'},
-                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', '-', '-'},
-                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', '-', '-'},
-                {'-', 'M', '-', '-', '-', '-', '-', '-', '-', 'M', 'M', 'S'},
-                {'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-                {'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'}
+                {'P', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□'},
+                {'M', 'M', 'M', 'M', '□', '□', '□', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', 'M', '□', '□', '□', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', 'M', 'M', 'M', 'M', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', 'M', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', 'M', '□', '□', '□', '□', '□'},
+                {'□', 'M', 'M', 'M', 'M', '□', 'M', 'M', 'M', 'M', '□', '□'},
+                {'□', 'M', '□', '□', '□', '□', '□', '□', '□', 'M', '□', '□'},
+                {'□', 'M', '□', '□', '□', '□', '□', '□', '□', 'M', '□', '□'},
+                {'□', 'M', '□', '□', '□', '□', '□', '□', '□', 'M', 'M', 'S'},
+                {'□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□'}
         };
     }
 
     public static boolean isInsideMatrix(char[][] map, int row, int col) {
+        int numFilas = map.length;
+        int numColumnas = map[0].length;
 
-        // Number of rows and columns
-        int nRows = map.length;
-        int nColumns = map[0].length;
-
-        // Return true if row & column are inside matrix and false when not
-        return (row >= 0 && row < nRows && col >= 0 && col < nColumns);
+        return row >= 0 && row < numFilas && col >= 0 && col < numColumnas;
     }
 
     public static boolean isAWall(char[][] map, int row, int col) {
         return map[row][col] == 'M';
     }
 
+    public static boolean isValidMove(char[][] map, int row, int col) {
+        return isInsideMatrix(map, row, col) && !isAWall(map, row, col);
+    }
+
+
     public static void printMap(char[][] map) {
-        for (int row = 0; row < map.length; row++) {
-            for (int col = 0; col < map[row].length; col++) {
-                System.out.print(map[row][col] + " ");
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                System.out.print(map[i][j] + " ");
             }
             System.out.println();
         }
     }
 
     public static void startGame(char[][] map, Scanner scanner) {
-        int row = 0;
-        int col = 0;
-
+        // TODO: implementar vuelta al menu tras ganar
         char nextMove = ' ';
         printMap(map);
 
-        while (nextMove != 'Q') {
+        while (nextMove != 'Q' && !move(map, nextMove)) {
             nextMove = scanner.next().charAt(0);
             nextMove = Character.toUpperCase(nextMove);
-            move(map, row, col, nextMove);
-            printMap(map);
+            move(map, nextMove);
+
         }
     }
 
-    public static boolean isGameWon(char[][] map, int row, int col) {
-        return map[row][col] == 'S';
-    }
 
-    public static void move(char[][] map, int row, int col, char nextMove) {
-        if (!isValidMove(map, row, col)) {
-            return;
-        }
+    public static boolean move(char[][] map, char nextMove) {
+        boolean isGameWon = false;
 
         switch (nextMove) {
             case 'A':
-                map[row][col] = '-';
-                col -= 1;
-                map[row][col] = 'P';
-                break;
-            case 'W':
-                map[row][col] = '-';
-                row -= 1;
-                map[row][col] = 'P';
+                if (map[row][col - 1] == 'S') {
+                    isGameWon = true;
+                } else if (isValidMove(map, row, col - 1)) {
+                    map[row][col] = '□';
+                    col -= 1;
+                    map[row][col] = 'P';
+                    printMap(map);
+                }
                 break;
             case 'D':
-                map[row][col] = '-';
-                col += 1;
-                map[row][col] = 'P';
+                if (map[row][col + 1] == 'S') {
+                    isGameWon = true;
+                } else if (isValidMove(map, row, col + 1)) {
+                    map[row][col] = '□';
+                    col += 1;
+                    map[row][col] = 'P';
+                    printMap(map);
+                }
                 break;
             case 'S':
-                map[row][col] = '-';
-                row +=  1;
-                map[row][col] = 'P';
+                if (map[row + 1][col] == 'S') {
+                    isGameWon = true;
+                } else if (isValidMove(map, row + 1, col)) {
+                    map[row][col] = '□';
+                    row += 1;
+                    map[row][col] = 'P';
+                    printMap(map);
+                }
+                break;
+            case 'W':
+                if (map[row - 1][col] == 'S') {
+                    isGameWon = true;
+                }
+
+                if (!isInsideMatrix(map, row - 1, col) || isAWall(map, row - 1, col)) {
+                    printMap(map);
+                } else {
+                    map[row][col] = '□';
+                    row -= 1;
+                    map[row][col] = 'P';
+                    printMap(map);
+                }
                 break;
             default:
                 break;
         }
 
-
+        return isGameWon;
     }
 
-    public static boolean isValidMove(char[][] map, int row, int col) {
-        return isInsideMatrix(map, row, col) && !isAWall(map, row, col);
-    }
 
     public static int selectMenuOption(Scanner scanner) {
         System.out.println();
