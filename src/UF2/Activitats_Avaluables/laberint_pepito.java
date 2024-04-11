@@ -6,7 +6,7 @@ public class laberint_pepito {
 
     public static char[][] easyMap() {
         return new char[][]{
-                {'P', 'M', 'M', 'S'},
+                {'□', 'M', 'M', 'S'},
                 {'□', 'M', 'M', '□'},
                 {'□', 'M', 'M', '□'},
                 {'□', '□', '□', '□'}
@@ -15,7 +15,7 @@ public class laberint_pepito {
 
     public static char[][] mediumMap() {
         return new char[][]{
-                {'P', 'M', 'M', '□', '□', '□', '□', 'S'},
+                {'□', 'M', 'M', '□', '□', '□', '□', 'S'},
                 {'□', '□', 'M', '□', '□', '□', 'M', '□'},
                 {'□', '□', 'M', '□', '□', '□', 'M', '□'},
                 {'□', '□', '□', '□', 'M', 'M', '□', '□'},
@@ -28,7 +28,7 @@ public class laberint_pepito {
 
     public static char[][] hardMap() {
         return new char[][]{
-                {'P', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□'},
+                {'□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□', '□'},
                 {'M', 'M', 'M', 'M', '□', '□', '□', '□', '□', '□', '□', '□'},
                 {'□', '□', '□', 'M', '□', '□', '□', '□', '□', '□', '□', '□'},
                 {'□', '□', '□', 'M', 'M', 'M', 'M', '□', '□', '□', '□', '□'},
@@ -58,6 +58,14 @@ public class laberint_pepito {
         return isInsideMatrix(map, row, col) && !isAWall(map, row, col);
     }
 
+    /*public static void nextValidPosition(char[][] map, int row, int col){
+        for (int i = 0; i < map.length; i++){
+            for (int j = 0; j < map[row].length; j++){
+                if (isValidMove())
+            }
+        }
+    }*/
+
 
     public static void printMap(char[][] map) {
         for (int i = 0; i < map.length; i++) {
@@ -71,64 +79,95 @@ public class laberint_pepito {
     public static void startGame(char[][] map, Scanner scanner) {
         // TODO: implementar vuelta al menu tras ganar
         char nextMove = ' ';
-        printMap(map);
 
-        while (nextMove != 'Q' && !move(map, nextMove)) {
-            nextMove = scanner.next().charAt(0);
-            nextMove = Character.toUpperCase(nextMove);
-            move(map, nextMove);
+        boolean continueGame = false;
+        boolean isStartGame = true;
+
+        if (isStartGame) {
+            map[row][col] = 'P';
+            printMap(map);
+            continueGame = true;
 
         }
-    }
 
+
+        while (nextMove != 'Q' && !move(map, nextMove) && continueGame) {
+            nextMove = scanner.next().charAt(0);
+            nextMove = Character.toUpperCase(nextMove);
+            continueGame = false;
+        }
+    }
 
     public static boolean move(char[][] map, char nextMove) {
         boolean isGameWon = false;
 
+
         switch (nextMove) {
             case 'A':
-                if (map[row][col - 1] == 'S') {
-                    isGameWon = true;
-                } else if (isValidMove(map, row, col - 1)) {
+                if (isInsideMatrix(map, row, col - 1)) {
+                    if (map[row][col - 1] == 'S') {
+                        map[row][col] = '□';
+                        isGameWon = true;
+
+                        row = 0;
+                        col = 0;
+                    }
+                }
+
+                if (isValidMove(map, row, col - 1)) {
                     map[row][col] = '□';
                     col -= 1;
                     map[row][col] = 'P';
-                    printMap(map);
                 }
+                printMap(map);
                 break;
             case 'D':
-                if (map[row][col + 1] == 'S') {
-                    isGameWon = true;
-                } else if (isValidMove(map, row, col + 1)) {
+                if (isInsideMatrix(map, row, col + 1)) {
+                    if (map[row][col + 1] == 'S') {
+                        isGameWon = true;
+                        row = 0;
+                        col = 0;
+                    }
+                }
+                printMap(map);
+                if (isValidMove(map, row, col + 1)) {
                     map[row][col] = '□';
                     col += 1;
                     map[row][col] = 'P';
-                    printMap(map);
                 }
+                printMap(map);
                 break;
             case 'S':
-                if (map[row + 1][col] == 'S') {
-                    isGameWon = true;
-                } else if (isValidMove(map, row + 1, col)) {
+                if (isInsideMatrix(map, row + 1, col)) {
+                    if (map[row + 1][col] == 'S') {
+                        isGameWon = true;
+                        row = 0;
+                        col = 0;
+                    }
+                }
+
+                if (isValidMove(map, row + 1, col)) {
                     map[row][col] = '□';
                     row += 1;
                     map[row][col] = 'P';
-                    printMap(map);
                 }
+                printMap(map);
                 break;
             case 'W':
-                if (map[row - 1][col] == 'S') {
-                    isGameWon = true;
+                if (isInsideMatrix(map, row - 1, col)) {
+                    if (map[row - 1][col] == 'S') {
+                        isGameWon = true;
+                        row = 0;
+                        col = 0;
+                    }
                 }
 
-                if (!isInsideMatrix(map, row - 1, col) || isAWall(map, row - 1, col)) {
-                    printMap(map);
-                } else {
+                if (isValidMove(map, row - 1, col)) {
                     map[row][col] = '□';
                     row -= 1;
                     map[row][col] = 'P';
-                    printMap(map);
                 }
+                printMap(map);
                 break;
             default:
                 break;
