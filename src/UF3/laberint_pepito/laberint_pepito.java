@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class laberint_pepito {
@@ -128,7 +130,6 @@ public class laberint_pepito {
                         isGameWon = true;
                         System.out.println("Enhorabona has guanyat!!!");
 
-
                         row = 0;
                         col = 0;
                     }
@@ -147,7 +148,6 @@ public class laberint_pepito {
                         map[row][col] = '□';
                         isGameWon = true;
                         System.out.println("Enhorabona has guanyat!!!");
-
 
                         row = 0;
                         col = 0;
@@ -204,7 +204,6 @@ public class laberint_pepito {
         return isGameWon;
     }
 
-
     public static int selectMenuOption(Scanner scanner) {
         System.out.println();
         System.out.println("###########");
@@ -228,7 +227,20 @@ public class laberint_pepito {
         return selectedLevel;
     }
 
-    public static void main(String[] args) {
+    public static void easyMapFile() throws Exception{
+        File file = new File("src/UF3/laberint_pepito/easy_map.txt");
+        PrintWriter printWriter = new PrintWriter(file);
+
+        printWriter.print("test");
+
+        printWriter.close();
+
+    }
+
+    public static void main(String[] args) throws  Exception{
+        easyMapFile();
+
+
         Scanner scanner = new Scanner(System.in);
         int selectedMenu = selectMenuOption(scanner);
 
