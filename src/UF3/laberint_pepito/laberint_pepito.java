@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class laberint_pepito {
@@ -101,6 +99,7 @@ public class laberint_pepito {
 
     public static void startGame(char[][] map, Scanner scanner) {
         char nextMove = ' ';
+        int moves = 0;
 
         setInitialPosition(map);
 
@@ -112,26 +111,27 @@ public class laberint_pepito {
             printMap(map);
         }
 
-        while (nextMove != 'Q' && !move(map, nextMove)) {
+        while (nextMove != 'Q') {
             nextMove = scanner.next().charAt(0);
             nextMove = Character.toUpperCase(nextMove);
+            move(map, nextMove, scanner);
+            moves++;
         }
-
     }
 
-    public static boolean move(char[][] map, char nextMove) {
-        boolean isGameWon = false;
-
+    public static void move(char[][] map, char nextMove, Scanner scanner) {
         switch (nextMove) {
             case 'A':
                 if (isInsideMatrix(map, row, col - 1)) {
                     if (map[row][col - 1] == 'S') {
                         map[row][col] = '□';
-                        isGameWon = true;
                         System.out.println("Enhorabona has guanyat!!!");
+                        selectMenuOption(scanner);
 
-                        row = 0;
-                        col = 0;
+                        row = -1;
+                        col = -1;
+                        setInitialPosition(map);
+                        map[row][col] = 'P';
                     }
                 }
 
@@ -146,11 +146,13 @@ public class laberint_pepito {
                 if (isInsideMatrix(map, row, col + 1)) {
                     if (map[row][col + 1] == 'S') {
                         map[row][col] = '□';
-                        isGameWon = true;
                         System.out.println("Enhorabona has guanyat!!!");
+                        selectMenuOption(scanner);
 
-                        row = 0;
-                        col = 0;
+                        row = -1;
+                        col = -1;
+                        setInitialPosition(map);
+                        map[row][col] = 'P';
                     }
                 }
 
@@ -164,11 +166,14 @@ public class laberint_pepito {
             case 'S':
                 if (isInsideMatrix(map, row + 1, col)) {
                     if (map[row + 1][col] == 'S') {
-                        isGameWon = true;
+                        map[row][col] = '□';
                         System.out.println("Enhorabona has guanyat!!!");
+                        selectMenuOption(scanner);
 
-                        row = 0;
-                        col = 0;
+                        row = -1;
+                        col = -1;
+                        setInitialPosition(map);
+                        map[row][col] = 'P';
                     }
                 }
 
@@ -182,11 +187,14 @@ public class laberint_pepito {
             case 'W':
                 if (isInsideMatrix(map, row - 1, col)) {
                     if (map[row - 1][col] == 'S') {
-                        isGameWon = true;
+                        map[row][col] = '□';
                         System.out.println("Enhorabona has guanyat!!!");
+                        selectMenuOption(scanner);
 
-                        row = 0;
-                        col = 0;
+                        row = -1;
+                        col = -1;
+                        setInitialPosition(map);
+                        map[row][col] = 'P';
                     }
                 }
 
@@ -197,15 +205,18 @@ public class laberint_pepito {
                 }
                 printMap(map);
                 break;
+            case 'Q':
+                row = -1;
+                col = -1;
+                setInitialPosition(map);
+                map[row][col] = 'P';
+
             default:
                 break;
         }
-
-        return isGameWon;
     }
 
     public static int selectMenuOption(Scanner scanner) {
-        System.out.println();
         System.out.println("###########");
         System.out.println("#      Menu     #");
         System.out.println("###########");
@@ -222,25 +233,17 @@ public class laberint_pepito {
         System.out.println("2. Mitjà");
         System.out.println("3. Difícil");
         char selectedLevel = scanner.next().charAt(0);
-        selectedLevel = Character.toUpperCase(selectedLevel);
+
+        if (selectedLevel == 'Q' || selectedLevel == 'q') {
+            selectMenuOption(scanner);
+        } else {
+            selectedLevel = Character.toUpperCase(selectedLevel);
+        }
 
         return selectedLevel;
     }
 
-    public static void easyMapFile() throws Exception{
-        File file = new File("src/UF3/laberint_pepito/easy_map.txt");
-        PrintWriter printWriter = new PrintWriter(file);
-
-        printWriter.print("test");
-
-        printWriter.close();
-
-    }
-
-    public static void main(String[] args) throws  Exception{
-        easyMapFile();
-
-
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int selectedMenu = selectMenuOption(scanner);
 
@@ -254,15 +257,12 @@ public class laberint_pepito {
                     startGame(mediumMap(), scanner);
                 } else if (selectedLevel == '3') {
                     startGame(hardMap(), scanner);
-                } else if (selectedLevel == 'Q') {
-                    selectedMenu = selectMenuOption(scanner);
                 }
-
             } else if (selectedMenu == 2) {
-                // resultats partida
-                System.out.println("Aqui surten els resultats1");
-                selectedMenu = selectMenuOption(scanner);
-            } else if (selectedMenu == 'Q') {
+                System.out.println("resultats");
+            }
+
+            if (selectedMenu == 'Q' || selectedMenu == 'q') {
                 selectedMenu = selectMenuOption(scanner);
             } else {
                 System.out.println("La opció triada no es correcte si us plau escull una opció vàlida");
