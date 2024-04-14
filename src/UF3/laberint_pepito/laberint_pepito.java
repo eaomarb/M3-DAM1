@@ -116,7 +116,13 @@ public class laberint_pepito {
             nextMove = Character.toUpperCase(nextMove);
             move(map, nextMove, scanner);
             moves++;
+
+            if (nextMove == 'Q' || nextMove == 'q') {
+                selectMenuOption(scanner);
+            }
         }
+
+
     }
 
     public static void move(char[][] map, char nextMove, Scanner scanner) {
@@ -260,9 +266,6 @@ public class laberint_pepito {
                 }
             } else if (selectedMenu == 2) {
                 System.out.println("resultats");
-            }
-
-            if (selectedMenu == 'Q' || selectedMenu == 'q') {
                 selectedMenu = selectMenuOption(scanner);
             } else {
                 System.out.println("La opció triada no es correcte si us plau escull una opció vàlida");
@@ -272,7 +275,6 @@ public class laberint_pepito {
                 selectedMenu = scanner.nextInt();
             }
         }
-
         System.out.println("Gràcies per jugar fins un altre!");
     }
 }
