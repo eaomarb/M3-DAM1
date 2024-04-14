@@ -97,7 +97,7 @@ public class laberint_pepito {
         }
     }
 
-    public static boolean startGame(char[][] map, Scanner scanner) {
+    public static void startGame(char[][] map, Scanner scanner, int selectedMenu) {
         char nextMove = ' ';
         int moves = 0;
         boolean isGameWon = false;
@@ -112,25 +112,16 @@ public class laberint_pepito {
             printMap(map);
         }
 
-        while (nextMove != 'Q') {
+        while (nextMove != 'Q' && !isGameWon) {
             nextMove = scanner.next().charAt(0);
             nextMove = Character.toUpperCase(nextMove);
             int moveResult = move(map, nextMove, scanner);
             moves += moveResult;
             if (row == -1 && col == -1) {
                 isGameWon = true;
-                setInitialPosition(map);
-                map[row][col] = 'P';
-                System.out.println("ENhorabuena");
-            }
-
-            if (nextMove == 'q' || nextMove == 'Q') {
-                return false;
             }
         }
-        return isGameWon;
     }
-
 
     public static int move(char[][] map, char nextMove, Scanner scanner) {
         int moves = 0;
@@ -140,6 +131,8 @@ public class laberint_pepito {
                 if (isInsideMatrix(map, row, col - 1)) {
                     if (map[row][col - 1] == 'S') {
                         map[row][col] = '□';
+                        System.out.println("Enhorabona has guanyat!!!");
+                        selectMenuOption(scanner);
 
                         row = -1;
                         col = -1;
@@ -207,10 +200,12 @@ public class laberint_pepito {
                 if (isInsideMatrix(map, row - 1, col)) {
                     if (map[row - 1][col] == 'S') {
                         map[row][col] = '□';
+                        System.out.println("Enhorabona has guanyat!!!");
+
                         row = -1;
                         col = -1;
-//                        setInitialPosition(map);
-//                        map[row][col] = 'P';
+                        setInitialPosition(map);
+                        map[row][col] = 'P';
                         moves = 1;
                     }
                 }
@@ -223,6 +218,12 @@ public class laberint_pepito {
                 }
                 printMap(map);
                 break;
+            case 'Q':
+                row = -1;
+                col = -1;
+                setInitialPosition(map);
+                map[row][col] = 'P';
+                break;
             default:
                 break;
         }
@@ -231,6 +232,9 @@ public class laberint_pepito {
     }
 
     public static int selectMenuOption(Scanner scanner) {
+        System.out.println("###########");
+        System.out.println("#      Menu     #");
+        System.out.println("###########");
         System.out.println("1. Jugar partida");
         System.out.println("2. Resultats partides");
         System.out.println("3. Sortir");
@@ -252,41 +256,33 @@ public class laberint_pepito {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        boolean shouldExit = false;
-        boolean hasWon = false;
+        int selectedMenu = selectMenuOption(scanner);
+        char selectedLevel = selectLevelOption(scanner);
 
-        while (!shouldExit && !hasWon) {
-            int selectedMenu = selectMenuOption(scanner);
-
-            while (selectedMenu == 1) {
-                char selectedLevel = selectLevelOption(scanner);
+        while (selectedMenu != 3) {
+            if (selectedMenu == 1) {
                 if (selectedLevel == '1') {
-                    if (hasWon) {
-                        selectedMenu = selectMenuOption(scanner);
-                    } else {
-                        startGame(easyMap(), scanner);
-                        hasWon = startGame(easyMap(), scanner);
-                    }
-
+                    startGame(easyMap(), scanner, selectedMenu);
+                    selectedMenu = selectMenuOption(scanner);
                 } else if (selectedLevel == '2') {
-                    startGame(mediumMap(), scanner);
+                    startGame(mediumMap(), scanner, selectedMenu);
                 } else if (selectedLevel == '3') {
-                    startGame(hardMap(), scanner);
+                    startGame(hardMap(), scanner, selectedMenu);
+                } else if (selectedLevel == 'q' || selectedLevel == 'Q') {
+                    selectedMenu = selectMenuOption(scanner);
                 }
-            }
-            if (selectedMenu == 2) {
+
+            } else if (selectedMenu == 2) {
                 System.out.println("resultats");
-            } else if (selectedMenu == 3) {
-                shouldExit = true; // Salir del programa si el jugador elige salir
+                selectedMenu = selectMenuOption(scanner);
             } else {
                 System.out.println("La opció triada no es correcte si us plau escull una opció vàlida");
                 System.out.println("1. Jugar partida");
                 System.out.println("2. Resultats partides");
                 System.out.println("3. Sortir");
+                selectedMenu = scanner.nextInt();
             }
         }
-
         System.out.println("Gràcies per jugar fins un altre!");
     }
-
 }
