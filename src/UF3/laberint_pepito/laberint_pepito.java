@@ -97,9 +97,10 @@ public class laberint_pepito {
         }
     }
 
-    public static void startGame(char[][] map, Scanner scanner) {
+    public static void startGame(char[][] map, Scanner scanner, int selectedMenu) {
         char nextMove = ' ';
         int moves = 0;
+        boolean isGameWon = false;
 
         setInitialPosition(map);
 
@@ -111,21 +112,24 @@ public class laberint_pepito {
             printMap(map);
         }
 
-        while (nextMove != 'Q') {
+        while (nextMove != 'Q' && !isGameWon) {
             nextMove = scanner.next().charAt(0);
             nextMove = Character.toUpperCase(nextMove);
-            move(map, nextMove, scanner);
-            moves++;
-
-            if (nextMove == 'Q' || nextMove == 'q') {
-                selectMenuOption(scanner);
+            int moveResult = move(map, nextMove, scanner);
+            moves += moveResult;
+            System.out.println(moves);
+            if (row == -1 && col == -1) {
+                isGameWon = true;
             }
         }
-
-
+        if (isGameWon){
+            selectedMenu = selectMenuOption(scanner);
+        }
     }
 
-    public static void move(char[][] map, char nextMove, Scanner scanner) {
+    public static int move(char[][] map, char nextMove, Scanner scanner) {
+        int moves = 0;
+
         switch (nextMove) {
             case 'A':
                 if (isInsideMatrix(map, row, col - 1)) {
@@ -138,6 +142,7 @@ public class laberint_pepito {
                         col = -1;
                         setInitialPosition(map);
                         map[row][col] = 'P';
+                        moves = 1;
                     }
                 }
 
@@ -145,6 +150,7 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     col -= 1;
                     map[row][col] = 'P';
+                    moves = 1;
                 }
                 printMap(map);
                 break;
@@ -159,6 +165,7 @@ public class laberint_pepito {
                         col = -1;
                         setInitialPosition(map);
                         map[row][col] = 'P';
+                        moves = 1;
                     }
                 }
 
@@ -166,6 +173,7 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     col += 1;
                     map[row][col] = 'P';
+                    moves = 1;
                 }
                 printMap(map);
                 break;
@@ -180,6 +188,7 @@ public class laberint_pepito {
                         col = -1;
                         setInitialPosition(map);
                         map[row][col] = 'P';
+                        moves = 1;
                     }
                 }
 
@@ -187,6 +196,7 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     row += 1;
                     map[row][col] = 'P';
+                    moves = 1;
                 }
                 printMap(map);
                 break;
@@ -195,12 +205,13 @@ public class laberint_pepito {
                     if (map[row - 1][col] == 'S') {
                         map[row][col] = '□';
                         System.out.println("Enhorabona has guanyat!!!");
-                        selectMenuOption(scanner);
 
                         row = -1;
                         col = -1;
                         setInitialPosition(map);
                         map[row][col] = 'P';
+                        moves = 1;
+                        selectMenuOption(scanner);
                     }
                 }
 
@@ -208,6 +219,7 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     row -= 1;
                     map[row][col] = 'P';
+                    moves = 1;
                 }
                 printMap(map);
                 break;
@@ -216,10 +228,11 @@ public class laberint_pepito {
                 col = -1;
                 setInitialPosition(map);
                 map[row][col] = 'P';
-
             default:
                 break;
         }
+
+        return moves;
     }
 
     public static int selectMenuOption(Scanner scanner) {
@@ -240,11 +253,7 @@ public class laberint_pepito {
         System.out.println("3. Difícil");
         char selectedLevel = scanner.next().charAt(0);
 
-        if (selectedLevel == 'Q' || selectedLevel == 'q') {
-            selectMenuOption(scanner);
-        } else {
-            selectedLevel = Character.toUpperCase(selectedLevel);
-        }
+        selectedLevel = Character.toUpperCase(selectedLevel);
 
         return selectedLevel;
     }
@@ -258,11 +267,13 @@ public class laberint_pepito {
                 char selectedLevel = selectLevelOption(scanner);
 
                 if (selectedLevel == '1') {
-                    startGame(easyMap(), scanner);
+                    startGame(easyMap(), scanner, selectedMenu);
                 } else if (selectedLevel == '2') {
-                    startGame(mediumMap(), scanner);
+                    startGame(mediumMap(), scanner, selectedMenu);
                 } else if (selectedLevel == '3') {
-                    startGame(hardMap(), scanner);
+                    startGame(hardMap(), scanner, selectedMenu);
+                } else if (selectedLevel == 'Q') {
+                    selectedMenu = selectMenuOption(scanner);
                 }
             } else if (selectedMenu == 2) {
                 System.out.println("resultats");
