@@ -115,14 +115,18 @@ public class laberint_pepito {
         while (nextMove != 'Q') {
             nextMove = scanner.next().charAt(0);
             nextMove = Character.toUpperCase(nextMove);
+
             int moveResult = move(map, nextMove, scanner);
             moves += moveResult;
+
             if (row == -1 && col == -1) {
                 isGameWon = true;
                 setInitialPosition(map);
                 map[row][col] = 'P';
-                System.out.println("ENhorabuena");
+                System.out.println("Enhorabona!! Has guanyat!");
+                return false;
             }
+
 
             if (nextMove == 'q' || nextMove == 'Q') {
                 return false;
@@ -143,8 +147,7 @@ public class laberint_pepito {
 
                         row = -1;
                         col = -1;
-                        setInitialPosition(map);
-                        map[row][col] = 'P';
+
                         moves = 1;
                     }
                 }
@@ -153,21 +156,20 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     col -= 1;
                     map[row][col] = 'P';
+
                     moves = 1;
+
+                    printMap(map);
                 }
-                printMap(map);
                 break;
             case 'D':
                 if (isInsideMatrix(map, row, col + 1)) {
                     if (map[row][col + 1] == 'S') {
                         map[row][col] = '□';
-                        System.out.println("Enhorabona has guanyat!!!");
-                        selectMenuOption(scanner);
 
                         row = -1;
                         col = -1;
-                        setInitialPosition(map);
-                        map[row][col] = 'P';
+
                         moves = 1;
                     }
                 }
@@ -176,21 +178,19 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     col += 1;
                     map[row][col] = 'P';
+
                     moves = 1;
+
+                    printMap(map);
                 }
-                printMap(map);
                 break;
             case 'S':
                 if (isInsideMatrix(map, row + 1, col)) {
                     if (map[row + 1][col] == 'S') {
                         map[row][col] = '□';
-                        System.out.println("Enhorabona has guanyat!!!");
-                        selectMenuOption(scanner);
-
                         row = -1;
                         col = -1;
-                        setInitialPosition(map);
-                        map[row][col] = 'P';
+
                         moves = 1;
                     }
                 }
@@ -199,9 +199,12 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     row += 1;
                     map[row][col] = 'P';
+
                     moves = 1;
+
+                    printMap(map);
                 }
-                printMap(map);
+
                 break;
             case 'W':
                 if (isInsideMatrix(map, row - 1, col)) {
@@ -209,8 +212,7 @@ public class laberint_pepito {
                         map[row][col] = '□';
                         row = -1;
                         col = -1;
-//                        setInitialPosition(map);
-//                        map[row][col] = 'P';
+
                         moves = 1;
                     }
                 }
@@ -219,21 +221,28 @@ public class laberint_pepito {
                     map[row][col] = '□';
                     row -= 1;
                     map[row][col] = 'P';
+
                     moves = 1;
+
+                    printMap(map);
                 }
-                printMap(map);
                 break;
             default:
                 break;
         }
-
         return moves;
     }
 
     public static int selectMenuOption(Scanner scanner) {
-        System.out.println("1. Jugar partida");
-        System.out.println("2. Resultats partides");
-        System.out.println("3. Sortir");
+        System.out.println("╔═════════════════════════════╗");
+        System.out.println("                   LABERINT PEPITO                  ");
+        System.out.println("╠═════════════════════════════╣");
+        System.out.println("╠ 1. Nova partida                     ");
+        System.out.println("╠ 2. Veure els resultats de les partides");
+        System.out.println("╠ 3. Sortir                                    ");
+        System.out.println("╚═════════════════════════════╝");
+        System.out.print("Selecciona una opció: ");
+
 
         return scanner.nextInt();
     }
@@ -252,22 +261,18 @@ public class laberint_pepito {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        boolean shouldExit = false;
+
+        boolean exitGame = false;
         boolean hasWon = false;
 
-        while (!shouldExit && !hasWon) {
+        while (!exitGame && !hasWon) {
             int selectedMenu = selectMenuOption(scanner);
 
             while (selectedMenu == 1) {
                 char selectedLevel = selectLevelOption(scanner);
                 if (selectedLevel == '1') {
-                    if (hasWon) {
-                        selectedMenu = selectMenuOption(scanner);
-                    } else {
-                        startGame(easyMap(), scanner);
-                        hasWon = startGame(easyMap(), scanner);
-                    }
-
+                    startGame(easyMap(), scanner);
+                    selectedMenu = selectMenuOption(scanner);
                 } else if (selectedLevel == '2') {
                     startGame(mediumMap(), scanner);
                 } else if (selectedLevel == '3') {
@@ -277,7 +282,8 @@ public class laberint_pepito {
             if (selectedMenu == 2) {
                 System.out.println("resultats");
             } else if (selectedMenu == 3) {
-                shouldExit = true; // Salir del programa si el jugador elige salir
+                exitGame = true;
+                System.out.println("Gràcies per jugar fins un altre!");
             } else {
                 System.out.println("La opció triada no es correcte si us plau escull una opció vàlida");
                 System.out.println("1. Jugar partida");
@@ -285,8 +291,5 @@ public class laberint_pepito {
                 System.out.println("3. Sortir");
             }
         }
-
-        System.out.println("Gràcies per jugar fins un altre!");
     }
-
 }
