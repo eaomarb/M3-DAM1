@@ -1,0 +1,10 @@
+Class: Clock
+	- class private variables: int hours, minutes, seconds
+	- public 2 constructors: C() // 00:00:00, C(H,M,S) // HH:MM:SS
+	- setters - 0..23, 0..59, 0..59
+	- public setHours, minutes, seconds
+	- public getHours, minutes, seconds
+	- public toString() //hh:mm:ss
+	- public boolean mod_hora(h,m,s) // t: ok f: no ok
+	- public void sumasegon() //S+1
+	- public void suma(segonds) // s + segons
