@@ -1,4 +1,4 @@
-Class: Clock
+Class: Rellotge
 	- class private variables: int hours, minutes, seconds
 	- public 2 constructors: C() // 00:00:00, C(H,M,S) // HH:MM:SS
 	- setters - 0..23, 0..59, 0..59
