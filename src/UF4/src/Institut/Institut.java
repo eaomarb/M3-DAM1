@@ -1,31 +1,12 @@
 package Institut;
 
 public class Institut {
-    private String nom;
-    public Professor[] profes;
-    private int quantitatProfes;
-
-    public Institut() {
-
-    }
-
-    public Institut(String nom, int maxProfes) {
-    }
-
-    public void afegirProfe(String nom, int edat, String DNI) {
-
-    }
-
-    public void afegirProfe(Professor professor) {
-
-    }
-
-    public void nouCurs() {
-
-    }
+    /*Parametres de clase*/
+    private String nom;            // Nom de l'institut
+    public Professor[] professors;            // Vector de professors de l'institut
+    private int quantitatProfessors;    // Profes que hi ha ara a l'institut
 
     /*Getters & Setters*/
-
     public String getNom() {
         return nom;
     }
@@ -34,19 +15,94 @@ public class Institut {
         this.nom = nom;
     }
 
-    public Professor[] getProfes() {
-        return profes;
+    /*Constructors*/
+
+    /**
+     * CONSTRUCTOR - Retorna un institut amb capacitat per a 10 professors
+     */
+    public Institut() {
+        professors = new Professor[10];
+        quantitatProfessors = 0;
     }
 
-    public void setProfes(Professor[] profes) {
-        this.profes = profes;
+    /**
+     * CONSTRUCTOR - Retorna un nou institut
+     *
+     * @param nom       de l'institut
+     * @param maxProfessors quants professors pot tenir com a maxim
+     */
+    public Institut(String nom, int maxProfessors) {
+        this.nom = nom;
+        professors = new Professor[maxProfessors];
+        quantitatProfessors = 0;
     }
 
-    public int getQuantitatProfes() {
-        return quantitatProfes;
+    /*Funcions privades*/
+
+    /**
+     * Torna un llistat de tots els professors de l'institut
+     *
+     * @return llistat de professors
+     */
+    private String llistaProfessors() {
+        String llista = "";
+        for (int i = 0; i < quantitatProfessors; i++) {
+            llista += professors[i] + "\n";
+        }
+        return llista;
     }
 
-    public void setQuantitatProfes(int quantitatProfes) {
-        this.quantitatProfes = quantitatProfes;
+    /*Funcions públiques*/
+
+    /**
+     * Genera un String amb les dades de l'institut
+     */
+    public String toString() {
+        return "Institut " + nom + " [" + quantitatProfessors + "/" + professors.length + "]\n"
+                + llistaProfessors();
+    }
+
+    /**
+     * Afegeix un nou professor a l'institut, passant les dades del professor
+     *
+     * @param nom  del professor
+     * @param edat del professor
+     * @param dni  del professor
+     */
+    public void afegeixProfessor(String nom, int edat, String dni) {
+        if (quantitatProfessors < professors.length) {
+            professors[quantitatProfessors] = new Professor(nom, edat, dni);
+            quantitatProfessors++;
+        }
+    }
+
+    /**
+     * Afegeix un nou professor a l'institut, passant el professor
+     *
+     * @param professor que volem afegir
+     */
+    public void afegeixProfessor(Professor professor) {
+        if (quantitatProfessors < professors.length) {
+            professors[quantitatProfessors] = professor;
+            quantitatProfessors++;
+        }
+    }
+
+    /**
+     * Incrementa un any, utilitzant getters i setters
+     */
+    public void nouCursInstitut() {
+        for (int i = 0; i < quantitatProfessors; i++) {
+            professors[i].setEdat(professors[i].getEdat() + 1);
+        }
+    }
+
+    /**
+     * Incrementa un any, utilitzant un metode de professor
+     */
+    public void nouCursProfessor() {
+        for (int i = 0; i < quantitatProfessors; i++) {
+            professors[i].afegeixAny();
+        }
     }
 }

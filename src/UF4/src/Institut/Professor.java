@@ -1,24 +1,19 @@
 package Institut;
 
+import java.util.regex.Pattern;
+
 public class Professor {
-    private String nom;
-    private int edat;
-    private String NIF;
+    // PARAMETRES DE CLASSE
+    //////////////////////////////////////////////////////////////////
+    private String nom;			// Nom del profe
+    private int    edat;		// Edat del profe
+    private String dni;			// DNI del profe
 
-    public Professor(String nom, int edat, String NIF) {
-        this.nom = nom;
-        this.edat = edat;
-        this.NIF = NIF;
-    }
-
-    public void afegirAny() {
-        this.edat = edat + 1;
-    }
-
+    // GETTERS I SETTERS
+    //////////////////////////////////////////////////////////////////
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -26,25 +21,50 @@ public class Professor {
     public int getEdat() {
         return edat;
     }
-
     public void setEdat(int edat) {
+        if (edat>0) {
+            this.edat = edat;
+        }
+    }
+
+    public String getDni() {
+        return dni;
+    }
+    public void setDni(String dni) {
+        // Comprovem que el DNI te el format correcte
+        Pattern pattern = Pattern.compile("\\d{8}[A-Z]");
+        if (pattern.matcher(dni).matches()) {
+            this.dni = dni;
+        }
+    }
+
+    // CONSTRUCTORS
+    //////////////////////////////////////////////////////////////////
+    /**
+     * CONSTRUCTOR - Retorna un profe amb les dades indicades
+     * @param nom del profe
+     * @param edat del profe
+     * @param dni del profe
+     */
+    public Professor(String nom, int edat, String dni) {
+        this.nom = nom;
         this.edat = edat;
+        this.dni = dni;
     }
 
-    public String getNIF() {
-        return NIF;
-    }
-
-    public void setNIF(String NIF) {
-        this.NIF = NIF;
-    }
-
-    @Override
+    // FUNCIONS PUBLIQUES
+    //////////////////////////////////////////////////////////////////
+    /**
+     * Genera un String amb les dades del profe
+     */
     public String toString() {
-        String str;
+        return dni+" - "+nom+" ("+edat+")";
+    }
 
-        str = "Nom: " + this.nom + "\nEdat: " + this.edat + "\nNIF: " + this.NIF;
-
-        return str;
+    /**
+     * Afegeix un any a l'edat del profe
+     */
+    public void afegeixAny() {
+        edat++;
     }
 }
