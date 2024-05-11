@@ -61,15 +61,16 @@ public class Exemple{
 
      /**
       * Funció que donat un nom d'un personatge, 'lestructura ' de dades
-      i el numero de personatges, retorni la seva energia
-      * @param nom del personatge
-      * @param noms vectors amb els noms dels pesonatges
-      * @param energia vector amb l'energia dels personatges
+      * i el numero de personatges, retorni la seva energia
+      *
+      * @param nom            del personatge
+      * @param noms           vectors amb els noms dels pesonatges
+      * @param energia        vector amb l'energia dels personatges
       * @param numPersonatges número de personatges
       * @return
       */
 
-    public static int energia(String nom, String[] noms, int[] energia, int numPersonatges){
+    public static int[] energia(String nom, String[] noms, int[] energia, int numPersonatges){
         //Consultant les dades a la estructura de daedes local no al fitxer
 
         //Retorni la seva energia
