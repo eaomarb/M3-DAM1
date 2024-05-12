@@ -14,12 +14,14 @@ public class Main {
         int any;
         int numeroNif;
 
-        int numeroPersones = 0;
+        System.out.println("Quantes persones vols que hi hagin al fitxer?");
+        int numeroPersones = teclat.nextInt();
+        teclat.nextLine();
 
-        System.out.println("Vols afegir una nova persona? (S/N)");
-        String afegirPersona = teclat.next();
+        Persona[] persones = new Persona[numeroPersones];
 
-        while (afegirPersona.equalsIgnoreCase("S")) {
+        int comptador = 0;
+        while (comptador < numeroPersones) {
             System.out.println("Introdueix el nom de la persona:");
             nom = teclat.nextLine();
             System.out.println("Introdueix el dia:");
@@ -30,12 +32,14 @@ public class Main {
             any = teclat.nextInt();
             System.out.println("Introdueix el número de NIF:");
             numeroNif = teclat.nextInt();
+            teclat.nextLine();
 
-
+            persones[comptador] = new Persona(nom, dia, mes, any, numeroNif);
+            comptador++;
         }
 
-        Persona[] persones = new Persona[1];
-        
-        System.out.println(persones[0]);
+        for (int i = 0; i < persones.length; i++) {
+            System.out.println(persones[i]);
+        }
     }
 }
