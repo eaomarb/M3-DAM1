@@ -4,13 +4,11 @@ import java.util.regex.Pattern;
 
 public class Professor {
     // PARAMETRES DE CLASSE
-    //////////////////////////////////////////////////////////////////
     private String nom;			// Nom del profe
     private int    edat;		// Edat del profe
     private String dni;			// DNI del profe
 
     // GETTERS I SETTERS
-    //////////////////////////////////////////////////////////////////
     public String getNom() {
         return nom;
     }
@@ -39,7 +37,6 @@ public class Professor {
     }
 
     // CONSTRUCTORS
-    //////////////////////////////////////////////////////////////////
     /**
      * CONSTRUCTOR - Retorna un profe amb les dades indicades
      * @param nom del profe
@@ -53,7 +50,6 @@ public class Professor {
     }
 
     // FUNCIONS PUBLIQUES
-    //////////////////////////////////////////////////////////////////
     /**
      * Genera un String amb les dades del profe
      */
